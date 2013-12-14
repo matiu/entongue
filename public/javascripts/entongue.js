@@ -1,3 +1,43 @@
+
+var old_heat;
+
+function refresh_entongues(map, position) {
+
+    //var get_url = '/get?lat=' 
+    var get_url = '/get-test?lat=' 
+        + position.coords.latitude 
+        + '&lon=' 
+        + position.coords.longitude
+        ;
+
+    jQuery.getJSON( get_url, function(data) {   
+
+        var items = [];
+        $.each( data.entongues, function( index, val ) {
+            items.push({ 
+                location: new google.maps.LatLng( val.lat, val.lon), 
+                weight: val.weight || 0.9
+            });
+        });
+
+console.log(items);
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: items 
+        });
+        heatmap.set('radius', 80);
+        console.log("setting the heat!");
+        heatmap.setMap(map);
+
+        if (old_heat) {
+            old_heat.setMap(null);
+            delete old_heat;
+        }
+        old_heat = heatmap;
+    });
+}
+
+
+
 function success(position) {
 
 // SET
@@ -23,7 +63,7 @@ console.log('sucss');
         },
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
+    map = new google.maps.Map(document.getElementById("mapcontainer"), options);
 
     var marker = new google.maps.Marker({
         position: coords,
@@ -31,30 +71,10 @@ console.log('sucss');
         title:"Estas aqui!"
     });
 
+    var interval = setInterval( function() {
+        refresh_entongues(map, position)
+    }, 5000);
+    
 
-    var get_url = '/get?lat=' 
-        + position.coords.latitude 
-        + '&lon=' 
-        + position.coords.longitude
-        ;
-
-    jQuery.getJSON( get_url, function(entongues) {   
-
-console.log(entongues);
-        var items = [];
-        $.each( data, function( index, val ) {
-            items.push({ 
-                location: new google.maps.
-                LatLng( val.lat, val.lon), 
-                weight: val.weight || 0.9
-            });
-        });
-
-        var heatmap = new google.maps.visualization.HeatmapLayer({
-            data: heatMapData
-        });
-        console.log("setting the heat!");
-        heatmap.setMap(map);
-    });
 };
 
