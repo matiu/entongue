@@ -35,12 +35,19 @@ function small_random () {
  * Module dependencies.
  */
 
+if (process.env.NODE_ENV == 'production') {
+    var MONGO_URL = "mongodb://cinemaki:cinemaki@linus.mongohq.com:10005/app19894934";
+}
+else {
+    var MONGO_URL = "mongodb://localhost/Entongue";
+}
+
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var extend = require('util')._extend;
-
+var MongoStore = require('connect-mongo')(express); 
 
 var app = express();
 
@@ -55,9 +62,11 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
+    store: new MongoStore({
+        url: MONGO_URL
+    }),
     secret  : "Stays my secret",
-    maxAge  : new Date(Date.now() + 3600000), //1 Hour
-    expires : new Date(Date.now() + 3600000), //1 Hour
+    cookie: { maxAge: 3600000 },
 }));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));

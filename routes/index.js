@@ -27,22 +27,32 @@ exports.setEntongue = function (req, res, next) {
     var lat = parseFloat(req.query.lat);
     var lon = parseFloat(req.query.lon);
     
-    Location.create(
-        {lat: lat, lon: lon}, 
-        function(err, created){
-        if (err) next(err);
-        else {
-            if (created) console.log("Entongue created");
-            else console.log("Error creating Entongue");
-            res.json('res', created);
-        }
-    });
+    var entongue = req.session.entongue || 0;
+    req.session.entongue = entongue + 1;
+    console.log(entongue);
+    
+    if (entongue < 5) {
+        Location.create(
+            {lat: lat, lon: lon}, 
+            function(err, created){
+            if (err) next(err);
+            else {
+                if (created) console.log("Entongue created");
+                else console.log("Error creating Entongue");
+                res.json('res', created);
+            }
+        });
+    }
+    else {
+        console.log('Sorry, you can not entongue any more');
+        res.json('res', null);
+    }
 };
 
 exports.getEntongue = function (req, res, next) {
     var ahora = new Date();
     ahora.setHours(ahora.getHours() + 1);
-
+    
     Location.find(
         {
             'updated': { $lt : ahora}
