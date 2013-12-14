@@ -2,16 +2,18 @@ extends layout
 
 
 block content
-    h1 
-        img.img-responsive(src='/images/logomovil_joda_para_matias.jpg', alt='Entongue')
-            
+           
     div#themap
     
     .text-center
 
-        button#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:80%; margin:10px auto; font-size:140%") 
-            i.fa.fa-th-large 
-            | &nbsp; ENDONDEAR
+        if can_entongue 
+            button#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:80%; margin:10px auto; font-size:140%") 
+                i.fa.fa-th-large 
+                    | &nbsp; ENTONGUEAR
+        else
+            button.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar por 1 hora #{can_entongue}.
+
 
     #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog

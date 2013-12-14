@@ -49,7 +49,7 @@ function success(position) {
     $("#entongar").click( function() {
 
 // DISABLED => Entongue despues de feeling
-//        $.get("/set?lan=" + position.coords.latitude
+//        $.get("/set?lat=" + position.coords.latitude
 //            + "&lon=" +  position.coords.longitude
 //             );
     }).removeClass('disabled');
@@ -69,7 +69,7 @@ console.log('sucss');
     var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     var options = {
-        zoom: 15,
+        zoom: 12,
         center: coords,
         mapTypeControl: false,
         navigationControlOptions: {
@@ -85,6 +85,7 @@ console.log('sucss');
         title:"Estas aqui!"
     });
 
+    refresh_entongues(map, position)
     var interval = setInterval( function() {
         refresh_entongues(map, position)
     }, 5000);
@@ -94,7 +95,7 @@ console.log('sucss');
 
 $(function() {
     $(".eicon").click( function () {
-        $.get("/set?lan=" + Gposition.coords.latitude
+        $.get("/set?lat=" + Gposition.coords.latitude
             + "&lon=" +  Gposition.coords.longitude
             + "&tag=" + $(this).attr('data-tag')
              );
