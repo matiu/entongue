@@ -24,8 +24,8 @@ exports.index = function(req, res){
 
 exports.setEntongue = function (req, res, next) {
     // getting lat, lon by params
-    var lat = req.query.lat;
-    var lon = req.query.lon;
+    var lat = parseFloat(req.query.lat);
+    var lon = parseFloat(req.query.lon);
     
     Location.create(
         {lat: lat, lon: lon}, 
