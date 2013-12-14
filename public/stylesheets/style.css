@@ -1,8 +1,17 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html { 
+    height: 100% 
+}
+body { 
+    height: 100%; 
+    margin: 0; 
+    padding: 0;
 }
 
-a {
-  color: #00B7FF;
+#themap { 
+    height: 80%;
+    width: 100%;
+}
+
+#mapcontainer { 
+    height: 80%;
 }
