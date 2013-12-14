@@ -6,7 +6,7 @@ var MAX_ENTONGUES_PER_SESSION = 5;
  */
 
 if (process.env.NODE_ENV == 'production') {
-    var MONGO_URL = "mongodb://cinemaki:cinemaki@linus.mongohq.com:10005/app19894934";
+    var MONGO_URL = "mongodb://entongue:entongue@paulo.mongohq.com:10007/app20376599";
 }
 else {
     var MONGO_URL = "mongodb://localhost/Entongue";
