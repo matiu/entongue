@@ -8,25 +8,30 @@ block content
     div#themap
     
     .text-center
-        a#entongar(class="btn btn-danger btn-large disabled", style="width:80%; margin:10px auto" ) ENTONGAR
 
-    button.btn.btn-primary.btn-lg(data-toggle="modal", data-target="#myModal")
-        Launch demo modal
+        button#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:80%; margin:10px auto; font-size:140%") 
+            i.fa.fa-th-large 
+            | &nbsp; ENTONGAR
 
     #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
             .modal-content
                 .modal-header
                     button.close(type="button", data-dismiss="modal", aria-hidden="true")&times;
-                h4#myModalLabel.modal-title
-                    Modal title
+                    h4#myModalLabel.modal-title ¿Qué entongás?
                 .modal-body
-                    ...
-                .modal-footer
-                    button.btn.btn-default(type="button", data-dismiss="modal")
-                        Close
-                    button.btn.btn-primary(type="button")
-                        Save changes
+                    table.text-center(style="width:100%")
+                        tr 
+                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-smile-o
+                            td: button.btn.btn-default.btn-lg.eicon(data-tag="meh", data-dismiss="modal"): i.fa.fa-meh-o
+                        tr 
+                            td: button.btn.btn-default.btn-lg.eicon(data-tag="frown", data-dismiss="modal"): i.fa.fa-frown-o
+                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-frown-o
+                        tr 
+                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-frown-o
+                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-frown-o
+
+
 
     script.
         if (navigator.geolocation) 
