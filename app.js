@@ -36,7 +36,7 @@ function small_random () {
  */
 
 if (process.env.NODE_ENV == 'production') {
-    var MONGO_URL = "mongodb://cinemaki:cinemaki@linus.mongohq.com:10005/app19894934";
+    var MONGO_URL = "mongodb://entongue:entongue@paulo.mongohq.com:10007/app20376599";
 }
 else {
     var MONGO_URL = "mongodb://localhost/Entongue";
@@ -71,9 +71,13 @@ app.use(express.session({
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if ('production' == process.env.NODE_ENV) {
+    console.log('Environment: production');
+    app.use(express.errorHandler());
+}
+else {
+    console.log('Environment: development');
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 }
 
 app.get('/', routes.index);
