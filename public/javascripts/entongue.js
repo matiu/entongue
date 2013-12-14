@@ -40,6 +40,12 @@ console.log(items);
 
 function success(position) {
 
+    // Set button
+    $("#entongar").attr("href", 
+        "/set?lan=" + position.coords.latitude
+        + "&lon=" +  position.coords.longitude
+    ).removeClass('disabled');
+
 // SET
 console.log('sucss');
     var mapcanvas = document.createElement('div');
