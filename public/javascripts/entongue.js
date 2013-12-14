@@ -1,13 +1,16 @@
 
 var old_heat;
+var Gposition;
 
-function refresh_entongues(map, position) {
+function refresh_entongues(map) {
+
+    if ( ! Gposition) return;
 
     //var get_url = '/get?lat=' 
     var get_url = '/get-test?lat=' 
-        + position.coords.latitude 
+        + Gposition.coords.latitude 
         + '&lon=' 
-        + position.coords.longitude
+        + Gposition.coords.longitude
         ;
 
     jQuery.getJSON( get_url, function(data) {   
@@ -20,7 +23,7 @@ function refresh_entongues(map, position) {
             });
         });
 
-console.log(items);
+//console.log(items);
         var heatmap = new google.maps.visualization.HeatmapLayer({
             data: items 
         });
@@ -40,11 +43,16 @@ console.log(items);
 
 function success(position) {
 
+    Gposition = position;
+
     // Set button
-    $("#entongar").attr("href", 
-        "/set?lan=" + position.coords.latitude
-        + "&lon=" +  position.coords.longitude
-    ).removeClass('disabled');
+    $("#entongar").click( function() {
+
+// DISABLED => Entongue despues de feeling
+//        $.get("/set?lan=" + position.coords.latitude
+//            + "&lon=" +  position.coords.longitude
+//             );
+    }).removeClass('disabled');
 
 // SET
 console.log('sucss');
@@ -83,4 +91,15 @@ console.log('sucss');
     
 
 };
+
+$(function() {
+    $(".eicon").click( function () {
+        $.get("/set?lan=" + Gposition.coords.latitude
+            + "&lon=" +  Gposition.coords.longitude
+            + "&tag=" + $(this).attr('data-tag')
+             );
+    });
+});
+
+
 
