@@ -7,6 +7,24 @@ block content
     .text-center
         a#entongar(class="btn btn-danger btn-large disabled", style="width:80%; margin:10px auto" ) ENTONGAR
 
+    button.btn.btn-primary.btn-lg(data-toggle="modal", data-target="#myModal")
+        Launch demo modal
+
+    #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type="button", data-dismiss="modal", aria-hidden="true")&times;
+                h4#myModalLabel.modal-title
+                    Modal title
+                .modal-body
+                    ...
+                .modal-footer
+                    button.btn.btn-default(type="button", data-dismiss="modal")
+                        Close
+                    button.btn.btn-primary(type="button")
+                        Save changes
+
     script.
         if (navigator.geolocation) 
             navigator.geolocation.getCurrentPosition(success);
