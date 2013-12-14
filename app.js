@@ -1,4 +1,36 @@
 
+
+var TEST_DATA = { 
+    entongues: [
+        {
+            lat: -26.8286,
+            lon: -65.199
+        },
+        {
+            lat: -26.8286,
+            lon: -65.13
+        },
+        {
+            lat: -26.83,
+            lon: -65.1942
+        },
+        {
+            lat: -26.8286,
+            lon: -65.19127
+        },{
+            lat: -26.82866,
+            lon: -65.19572
+        },{
+            lat: -26.828360,
+            lon: -65.199272
+        }
+    ]};
+
+function small_random () {
+    return (Math.random() - 0.5) / 100.;
+}
+
+
 /**
  * Module dependencies.
  */
@@ -7,6 +39,8 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var extend = require('util')._extend;
+
 
 var app = express();
 
@@ -30,6 +64,19 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/set', routes.setEntongue);
 app.get('/get', routes.getEntongue);
+
+
+app.get('/get-test', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var test = extend({}, TEST_DATA);
+
+    test.entongues.forEach( function(v) {
+        v.lat = parseFloat(v.lat) + small_random();
+        v.lon = parseFloat(v.lon) + small_random();
+    });
+
+    res.end(JSON.stringify(test, null, 3));
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
