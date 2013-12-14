@@ -3,8 +3,6 @@
  * GET home page.
  */
 
-var gm = require('googlemaps');
-
 if (process.env.NODE_ENV == 'production') {
     var MONGO_URL = "mongodb://cinemaki:cinemaki@linus.mongohq.com:10005/app19894934";
 }
@@ -12,7 +10,6 @@ else {
     var MONGO_URL = "mongodb://localhost/Entongue";
 }
 
-var util            = require('util');
 var mongoose        = require('mongoose')
   , db_lnk          = MONGO_URL
   , db              = mongoose.createConnection(db_lnk);
@@ -22,13 +19,6 @@ var locationSchema = require('../models/location'),
 
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
-};
-
-exports.location = function(req, res){
-    gm.reverseGeocode(gm.checkAndConvertPoint([41.850033, -87.6500523]), function(err, data){
-        util.puts(JSON.stringify(data));
-        res.json('index', { location: data });
-    });
 };
 
 exports.setEntongue = function (req, res, next) {
@@ -63,3 +53,4 @@ exports.getEntongue = function (req, res, next) {
         }
     });
 };
+
