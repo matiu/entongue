@@ -37,7 +37,6 @@ function small_random () {
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var extend = require('util')._extend;
@@ -63,10 +62,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/location', routes.location);
 app.get('/set', routes.setEntongue);
 app.get('/get', routes.getEntongue);
-app.get('/users', user.list);
 
 
 app.get('/get-test', function (req, res, next) {
