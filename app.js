@@ -29,6 +29,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/location', routes.location);
+app.get('/set', routes.setEntongue);
+app.get('/get', routes.getEntongue);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
