@@ -53,6 +53,12 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
+app.use(express.session({
+    secret  : "Stays my secret",
+    maxAge  : new Date(Date.now() + 3600000), //1 Hour
+    expires : new Date(Date.now() + 3600000), //1 Hour
+}));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 

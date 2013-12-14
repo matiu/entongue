@@ -18,7 +18,8 @@ var locationSchema = require('../models/location'),
     Location = db.model('Location', locationSchema);
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+    
+    res.render('index', { title: 'Entongue' });
 };
 
 exports.setEntongue = function (req, res, next) {
@@ -49,7 +50,8 @@ exports.getEntongue = function (req, res, next) {
         function(err, locations){
         if (err) next(err);
         else {
-            res.json('locations', locations);
+//            res.end(JSON.stringify(test, null, 3));
+            res.json('test', locations);
         }
     });
 };
