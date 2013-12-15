@@ -1,6 +1,5 @@
 
-var MAX_ENTONGUES_PER_SESSION = 1;
-var MAX_MINUTS_PER_ENTONGUE = 60;
+var SECS_BETWEEN_ENTONGUES = 120;
 
 /*
  * GET home page.
@@ -22,13 +21,14 @@ var locationSchema = require('../models/location'),
 
 exports.index = function(req, res){
 
-    var can = (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION ;
-    
+    var diff = ( Date.now() - (req.session.last_entongue || 0) ) / 1000. ;
+    var s = ( SECS_BETWEEN_ENTONGUES > diff ? SECS_BETWEEN_ENTONGUES - diff : 0);
+console.log(diff,s);    
     res.render('index', { 
         title: 'Entongue', 
         session: req.session, 
-        can_entongue: can,
-        minutes: MAX_MINUTS_PER_ENTONGUE
+        secs_left_to_entongue: parseInt(s) ,
+        SECS_BETWEEN_ENTONGUES: SECS_BETWEEN_ENTONGUES
     });
 };
 
@@ -42,14 +42,10 @@ exports.setEntongue = function (req, res, next) {
         return res.render('error401');
     }
     
-    var entongues = req.session.entongues || 0;
-    req.session.entongues = entongues + 1;
-    req.session.dt = new Date();
+    var diff = ( Date.now() - (req.session.last_entongue || 0) ) / 1000. ;
 
-console.log(entongues);
-console.log(req.session.dt);
-
-    if (entongues < MAX_ENTONGUES_PER_SESSION) {
+    if ( diff >  SECS_BETWEEN_ENTONGUES ) {
+        req.session.last_entongue = Date.now();
         Location.create(
             {lat: lat, lon: lon, tag: tag}, 
             function(err, created){

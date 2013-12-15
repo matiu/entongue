@@ -68,7 +68,6 @@ function refresh_entongues() {
             data: items 
         });
         heatmap.set('radius', 50);
-        console.log("setting the heat!");
         heatmap.setMap(Gmap);
 
         if (old_heat) {
@@ -128,10 +127,22 @@ function success(position) {
     refresh_entongues()
     var interval = setInterval( function() {
         refresh_entongues()
-    }, 5000);
+    }, 10000);
     
 
 };
+
+var setCountDown = function () {
+    setInterval( function() {
+        var m = parseInt( $('#countdown').html() );
+        if (m > 0) {
+            $('#countdown').html( m - 1 );
+        }
+        else {
+            window.location.reload();
+        }
+    }, 1000);
+}
 
 $(function() {
 
@@ -144,9 +155,12 @@ $(function() {
                 $("#entongar").hide();
                 $("#entongue_ok").removeClass('hide');
                 $("#cant_entongue").removeClass('hide');
+                setCountDown();
             } 
         );
     });
+
+    if( $("#entongar").length == 0 ) setCountDown();
 });
 
 

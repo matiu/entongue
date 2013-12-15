@@ -20,18 +20,19 @@ block content
   footer    
     .text-center
 
-        if can_entongue 
+        if secs_left_to_entongue == 0
             a#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:90%; margin:10px auto; font-size:90%") 
                 span.fa.fa-th-large 
-                | &nbsp; ENTONGUEAR
+                | &nbsp; ENTONGAR
 
             button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:90%; margin:10px auto; font-size:80%") No puedes entongar 
-                | por 
-                span#countdown #{minutes || 60} minutos
+                span#countdown #{SECS_BETWEEN_ENTONGUES}
+                | &nbsp; segundos
         else
             button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:90%; margin:10px auto; font-size:80%") No puedes entongar 
                 | por 
-                span#countdown #{minutes} minutos
+                span#countdown #{secs_left_to_entongue} 
+                | &nbsp; segundos
 
   #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
