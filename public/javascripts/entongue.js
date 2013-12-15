@@ -110,6 +110,7 @@ $(function() {
                 $("#entongar").hide();
                 $("#entongue_ok").removeClass('hide');
                 $("#cant_entongue").removeClass('hide');
+                location.reload();
             }
              
         );

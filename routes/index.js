@@ -24,11 +24,11 @@ exports.index = function(req, res){
 
     var can = (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION ;
        
-    var d = new Date();
+    var d = new Date(req.session.dt);
     var seconds = d.getMinutes() * 60 + d.getSeconds();
     var fiveMin = 60 * MAX_MINUTS_PER_ENTONGUE;
     var timeleft = fiveMin - seconds % fiveMin;
-    var diff = parseInt(timeleft / 60);
+    var diff = parseInt(timeleft / 60) + ' minutos y ' + timeleft % 60 + ' segundos';
     
     console.log(diff);
 console.log(req.session.entongues);
