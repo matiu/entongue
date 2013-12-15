@@ -18,9 +18,14 @@ function refresh_entongues() {
 
         var items = [];
         $.each( data.entongues, function( index, val ) {
+
+            // 
+            var d = 1. - ( ( Date.now() - new Date(val.updated)) /1000./60./60.  );
+//console.log(d);
+
             items.push({ 
                 location: new google.maps.LatLng( val.lat, val.lon), 
-                weight: val.weight || 0.9
+                weight: d || 0.9
             });
         });
 
