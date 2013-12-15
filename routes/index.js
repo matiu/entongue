@@ -1,4 +1,6 @@
 
+var MAX_ENTONGUES_PER_SESSION = 5;
+
 /*
  * GET home page.
  */
@@ -19,21 +21,32 @@ var locationSchema = require('../models/location'),
 
 exports.index = function(req, res){
     
-    res.render('index', { title: 'Entongue' });
+console.log(req.session.entongues);
+    res.render('index', { 
+        title: 'Entongue', 
+        session: req.session, 
+        can_entongue: (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION 
+    });
 };
 
 exports.setEntongue = function (req, res, next) {
     // getting lat, lon by params
     var lat = parseFloat(req.query.lat);
     var lon = parseFloat(req.query.lon);
+    var tag = req.query.tag;
+
+    if (!lat || ! lon || ! tag ) {
+        return res.render('error401');
+    }
     
-    var entongue = req.session.entongue || 0;
-    req.session.entongue = entongue + 1;
-    console.log(entongue);
-    
-    if (entongue < 5) {
+    var entongues = req.session.entongues || 0;
+    req.session.entongues = entongues + 1;
+
+console.log(entongues);
+
+    if (entongues < MAX_ENTONGUES_PER_SESSION) {
         Location.create(
-            {lat: lat, lon: lon}, 
+            {lat: lat, lon: lon, tag: tag}, 
             function(err, created){
             if (err) next(err);
             else {
