@@ -2,6 +2,11 @@ extends layout
 
 
 block content
+
+    #entongue_ok.alert.alert-success.alert-dismissable.hide  
+        a.close(data-dismiss="alert",href="#",aria-hidden="true")&times;
+        strong Bien! &nbsp;
+        | Entongue grabado.
            
     div#themap
     
@@ -11,8 +16,10 @@ block content
             button#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:80%; margin:10px auto; font-size:140%") 
                 i.fa.fa-th-large 
                     | &nbsp; ENTONGUEAR
+
+            button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar por 1 hora.
         else
-            button.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar por 1 hora #{can_entongue}.
+            button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar por #{minutes|| 60} minutos
 
 
     #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")

@@ -1,5 +1,5 @@
 
-var MAX_ENTONGUES_PER_SESSION = 5;
+var MAX_ENTONGUES_PER_SESSION = 1;
 
 /*
  * GET home page.
@@ -20,12 +20,15 @@ var locationSchema = require('../models/location'),
     Location = db.model('Location', locationSchema);
 
 exports.index = function(req, res){
+
+    var can = (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION ;
     
 console.log(req.session.entongues);
+console.log(can);
     res.render('index', { 
         title: 'Entongue', 
         session: req.session, 
-        can_entongue: (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION 
+        can_entongue: can
     });
 };
 
