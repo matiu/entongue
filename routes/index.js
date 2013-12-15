@@ -44,6 +44,7 @@ exports.setEntongue = function (req, res, next) {
     
     var diff = ( Date.now() - (req.session.last_entongue || 0) ) / 1000. ;
 
+    res.setHeader('Content-Type', 'application/json');
     if ( diff >  SECS_BETWEEN_ENTONGUES ) {
         req.session.last_entongue = Date.now();
         Location.create(
@@ -53,13 +54,13 @@ exports.setEntongue = function (req, res, next) {
             else {
                 if (created) console.log("Entongue created");
                 else console.log("Error creating Entongue");
-                res.json('res', created);
+                res.end(JSON.stringify({ res: created}, null, 3));
             }
         });
     }
     else {
         console.log('Sorry, you can not entongue any more');
-        res.json('res', null);
+        res.end(JSON.stringify({ res: null}, null, 3));
     }
 };
 
@@ -78,6 +79,7 @@ exports.getEntongue = function (req, res, next) {
         if (err) next(err);
         else {
             var r = {entongues: locations};
+            res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(r, null, 3));
         }
     });
