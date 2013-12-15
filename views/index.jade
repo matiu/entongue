@@ -23,9 +23,12 @@ block content
                 i.fa.fa-th-large 
                     | &nbsp; ENTONGUEAR
 
-            button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar por 1 hora.
+            button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar 
+                | por 
+                span#less_minutes #{minutes || 60} 
+                | &nbsp;minutos
         else
-            button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar 
+            button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar 
                 | por 
                 span#less_minutes #{minutes} 
                 | &nbsp;minutos
