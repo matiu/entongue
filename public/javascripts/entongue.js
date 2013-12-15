@@ -55,7 +55,6 @@ function success(position) {
     }).removeClass('disabled');
 
 // SET
-console.log('sucss');
     var mapcanvas = document.createElement('div');
     mapcanvas.id = 'mapcontainer';
 //    mapcanvas.style.height = screen.height + 'px'; 
@@ -94,11 +93,18 @@ console.log('sucss');
 };
 
 $(function() {
+
     $(".eicon").click( function () {
         $.get("/set?lat=" + Gposition.coords.latitude
             + "&lon=" +  Gposition.coords.longitude
-            + "&tag=" + $(this).attr('data-tag')
-             );
+            + "&tag=" + $(this).attr('data-tag'),
+            function() {
+                $("#entongar").hide();
+                $("#entongue_ok").removeClass('hide');
+                $("#cant_entongue").removeClass('hide');
+            }
+             
+        );
     });
 });
 
