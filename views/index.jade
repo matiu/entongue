@@ -41,22 +41,24 @@ block content
                     +btn( "recital", "fa fa-music", "#BF003D", "Recital")
                     +btn( "crawd", "fa fa-group", "#EE7339", "Tumulto")
 
+    if ! can_entongue
+        script
+            $.ajaxSetup ({  
+                cache: false  
+            });  
+        
+            setInterval(function(){
+                $.getJSON('/lesstime', function(data) {
+                    console.log(data);
+                    $('#less_minutes').empty();
+                    $('#less_minutes').append(data.minutes);
+                });
+            }, 1000);
 
     script.
         if (navigator.geolocation) 
             navigator.geolocation.getCurrentPosition(success);
         else
             alert('Geo Location is not supported');
-            
-        $.ajaxSetup ({  
-            cache: false  
-        });  
-    
-        setInterval(function(){
-            $.getJSON('/lesstime', function(data) {
-                console.log(data);
-                $('#less_minutes').empty();
-                $('#less_minutes').append(data.minutes);
-            });
-        }, 1000);
+        
 
