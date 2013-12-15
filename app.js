@@ -4,25 +4,31 @@ var TEST_DATA = {
     entongues: [
         {
             lat: -26.8286,
-            lon: -65.199
+            lon: -65.199,
+            tag: 'party'
         },
         {
             lat: -26.8286,
-            lon: -65.13
+            lon: -65.13,
+            tag: 'jam'
         },
         {
             lat: -26.83,
-            lon: -65.1942
+            lon: -65.1942,
+            tag: 'jam'
         },
         {
             lat: -26.8286,
-            lon: -65.19127
+            lon: -65.19127,
+            tag: 'riot'
         },{
             lat: -26.82866,
-            lon: -65.19572
+            lon: -65.19572,
+            tag: 'music'
         },{
             lat: -26.828360,
-            lon: -65.199272
+            lon: -65.199272,
+            tag: 'crawd'
         }
     ]};
 
