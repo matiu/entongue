@@ -8,6 +8,7 @@ mixin btn(tag, cla, col, title)
 
 block content
 
+  #wrapper
 
     #entongue_ok.alert.alert-success.alert-dismissable.hide  
         a.close(data-dismiss="alert",href="#",aria-hidden="true")&times;
@@ -15,7 +16,8 @@ block content
         | Entongue grabado.
            
     div#themap
-    
+
+  footer    
     .text-center
 
         if can_entongue 
@@ -29,9 +31,12 @@ block content
         else
             button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:90%; margin:10px auto; font-size:80%") No puedes entongar 
                 | por 
-                span#less_minutes 
+            span#less_minutes 
 
-    #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+
+
+
+  #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
             .modal-content
                 .modal-body

@@ -114,7 +114,8 @@ function success(position) {
         navigationControlOptions: {
             style: google.maps.NavigationControlStyle.SMALL
         },
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        streetViewControl: false
     };
     Gmap = new google.maps.Map(document.getElementById("mapcontainer"), options);
 
