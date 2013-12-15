@@ -19,14 +19,16 @@ block content
     .text-center
 
         if can_entongue 
-            button#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:80%; margin:10px auto; font-size:140%") 
+            a#entongar.btn.btn-primary.btn-lg.disabled(data-toggle="modal", data-target="#myModal", style="width:80%; margin:10px auto; font-size:140%") 
                 i.fa.fa-th-large 
                     | &nbsp; ENTONGUEAR
 
             button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar por 1 hora.
         else
-            button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar por #{minutes|| 60} minutos
-
+            button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar 
+                | por 
+                span#less_minutes #{minutes} 
+                | &nbsp;minutos
 
     #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
@@ -44,4 +46,16 @@ block content
             navigator.geolocation.getCurrentPosition(success);
         else
             alert('Geo Location is not supported');
+            
+        $.ajaxSetup ({  
+            cache: false  
+        });  
+    
+        setInterval(function(){
+            $.getJSON('/lesstime', function(data) {
+                console.log(data);
+                $('#less_minutes').empty();
+                $('#less_minutes').append(data.minutes);
+            });
+        }, 10000);
 

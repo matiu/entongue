@@ -1,5 +1,6 @@
 
 var MAX_ENTONGUES_PER_SESSION = 1;
+var MAX_MINUTS_PER_ENTONGUE = 60;
 
 /*
  * GET home page.
@@ -22,14 +23,29 @@ var locationSchema = require('../models/location'),
 exports.index = function(req, res){
 
     var can = (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION ;
+
+    var minutes_now = new Date();
+    var minutes_saved = new Date(req.session.dt);
+    
+    var diff = (minutes_saved.getMinutes() + MAX_MINUTS_PER_ENTONGUE) - minutes_now.getMinutes();
     
 console.log(req.session.entongues);
 console.log(can);
     res.render('index', { 
         title: 'Entongue', 
         session: req.session, 
-        can_entongue: can
+        can_entongue: can,
+        minutes: diff
     });
+};
+
+exports.lesstime = function(req, res) {
+    var minutes_now = new Date();
+    var minutes_saved = new Date(req.session.dt);
+    
+    var diff = (minutes_saved.getMinutes() + MAX_MINUTS_PER_ENTONGUE) - minutes_now.getMinutes();
+    
+    res.json({'minutes': diff});
 };
 
 exports.setEntongue = function (req, res, next) {
@@ -44,8 +60,10 @@ exports.setEntongue = function (req, res, next) {
     
     var entongues = req.session.entongues || 0;
     req.session.entongues = entongues + 1;
+    req.session.dt = new Date();
 
 console.log(entongues);
+console.log(req.session.dt);
 
     if (entongues < MAX_ENTONGUES_PER_SESSION) {
         Location.create(
