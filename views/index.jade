@@ -27,14 +27,11 @@ block content
 
             button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:90%; margin:10px auto; font-size:80%") No puedes entongar 
                 | por 
-                span#less_minutes
+                span#countdown #{minutes || 60} minutos
         else
             button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:90%; margin:10px auto; font-size:80%") No puedes entongar 
                 | por 
-            span#less_minutes 
-
-
-
+                span#countdown #{minutes} minutos
 
   #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
@@ -45,6 +42,7 @@ block content
                     +btn( "party", "fa fa-gift", "#BF003D", "Fiesta")
                     +btn( "music", "fa fa-music", "#BF003D", "Recital")
                     +btn( "crawd", "fa fa-group", "#EE7339", "Tumulto")
+
     script.
         if (navigator.geolocation) 
             navigator.geolocation.getCurrentPosition(success);
