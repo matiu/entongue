@@ -1,8 +1,9 @@
 
 var old_heat;
 var Gposition;
+var Gmap;
 
-function refresh_entongues(map) {
+function refresh_entongues() {
 
     if ( ! Gposition) return;
 
@@ -29,7 +30,7 @@ function refresh_entongues(map) {
         });
         heatmap.set('radius', 80);
         console.log("setting the heat!");
-        heatmap.setMap(map);
+        heatmap.setMap(Gmap);
 
         if (old_heat) {
             old_heat.setMap(null);
@@ -76,17 +77,17 @@ function success(position) {
         },
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById("mapcontainer"), options);
+    Gmap = new google.maps.Map(document.getElementById("mapcontainer"), options);
 
     var marker = new google.maps.Marker({
         position: coords,
-        map: map,
+        map: Gmap,
         title:"Estas aqui!"
     });
 
-    refresh_entongues(map, position)
+    refresh_entongues()
     var interval = setInterval( function() {
-        refresh_entongues(map, position)
+        refresh_entongues()
     }, 5000);
     
 
@@ -99,6 +100,7 @@ $(function() {
             + "&lon=" +  Gposition.coords.longitude
             + "&tag=" + $(this).attr('data-tag'),
             function() {
+                refresh_entongues()
                 $("#entongar").hide();
                 $("#entongue_ok").removeClass('hide');
                 $("#cant_entongue").removeClass('hide');

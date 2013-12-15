@@ -76,8 +76,8 @@ exports.getEntongue = function (req, res, next) {
         function(err, locations){
         if (err) next(err);
         else {
-//            res.end(JSON.stringify(test, null, 3));
-            res.json('test', locations);
+            var r = {entongues: locations};
+            res.end(JSON.stringify(r, null, 3));
         }
     });
 };
