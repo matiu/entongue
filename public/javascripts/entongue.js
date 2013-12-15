@@ -8,9 +8,15 @@ function refresh_entongues() {
 
     if ( ! Gposition) return;
 
-//    var get_url = '/get?lat=' 
-    var get_url = '/get-test?lat=' 
-        + Gposition.coords.latitude 
+    var get_url;
+    if (window.location.href.indexOf('test=1') >= 0 ) {
+        get_url = '/get-test?lat=';
+    }
+    else {
+        get_url = '/get?lat=' ;
+    }
+
+    get_url += Gposition.coords.latitude 
         + '&lon=' 
         + Gposition.coords.longitude
         ;

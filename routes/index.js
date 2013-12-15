@@ -30,9 +30,9 @@ exports.index = function(req, res){
     var timeleft = fiveMin - seconds % fiveMin;
     var diff = parseInt(timeleft / 60) + ' minutos y ' + timeleft % 60 + ' segundos';
     
-    console.log(diff);
-console.log(req.session.entongues);
-console.log(can);
+//    console.log(diff);
+//console.log(req.session.entongues);
+//console.log(can);
     res.render('index', { 
         title: 'Entongue', 
         session: req.session, 
@@ -47,7 +47,7 @@ exports.lesstime = function(req, res) {
     var fiveMin = 60 * MAX_MINUTS_PER_ENTONGUE;
     var timeleft = fiveMin - seconds % fiveMin;
     var diff = parseInt(timeleft / 60) + ' minutos y ' + timeleft % 60 + ' segundos';
-    console.log(diff);
+//    console.log(diff);
     res.json({'minutes': diff});
 };
 

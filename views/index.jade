@@ -40,21 +40,6 @@ block content
                     +btn( "party", "fa fa-gift", "#BF003D", "Fiesta")
                     +btn( "music", "fa fa-music", "#BF003D", "Recital")
                     +btn( "crawd", "fa fa-group", "#EE7339", "Tumulto")
-
-    if ! can_entongue
-        script
-            $.ajaxSetup ({  
-                cache: false  
-            });  
-        
-            setInterval(function(){
-                $.getJSON('/lesstime', function(data) {
-                    console.log(data);
-                    $('#less_minutes').empty();
-                    $('#less_minutes').append(data.minutes);
-                });
-            }, 1000);
-
     script.
         if (navigator.geolocation) 
             navigator.geolocation.getCurrentPosition(success);
