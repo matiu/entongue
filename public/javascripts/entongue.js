@@ -19,10 +19,15 @@ function refresh_entongues() {
         var items = [];
         $.each( data.entongues, function( index, val ) {
 
-            // 
-            var d = - (1. - ( parseFloat( Date.now() - new Date(val.updated)) /1000./60./60.  ));
+            
+            var pasaron_segs =  (  Date.now() - new Date(val.updated) ) /1000. ;
+//console.log("pasaron",pasaron_segs);
 
-//console.log(d);
+            var d = 1. - (  pasaron_segs /3600. );
+
+//console.log("now",Date.now()/1000.);
+//console.log("updated",new Date(val.updated)/1000.);
+//console.log("d",d);
 
             items.push({ 
                 location: new google.maps.LatLng( val.lat, val.lon), 

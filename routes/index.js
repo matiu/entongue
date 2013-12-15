@@ -87,12 +87,15 @@ console.log(req.session.dt);
 };
 
 exports.getEntongue = function (req, res, next) {
-    var ahora = new Date();
-    ahora.setHours(ahora.getHours() + 1);
+    var limit = Date.now() - 3600*1000;
+
+    var limit_dt = new Date(limit);
+
+//console.log("DT",limit_dt.toISOString());
     
     Location.find(
         {
-            'updated': { $lt : ahora}
+            'updated': { $gt : limit_dt.toISOString()}
         }, 
         function(err, locations){
         if (err) next(err);
