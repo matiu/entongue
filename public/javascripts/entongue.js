@@ -20,7 +20,8 @@ function refresh_entongues() {
         $.each( data.entongues, function( index, val ) {
 
             // 
-            var d = 1. - ( ( Date.now() - new Date(val.updated)) /1000./60./60.  );
+            var d = - (1. - ( parseFloat( Date.now() - new Date(val.updated)) /1000./60./60.  ));
+
 //console.log(d);
 
             items.push({ 

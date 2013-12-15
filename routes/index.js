@@ -23,12 +23,14 @@ var locationSchema = require('../models/location'),
 exports.index = function(req, res){
 
     var can = (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION ;
-
-    var minutes_now = new Date();
-    var minutes_saved = new Date(req.session.dt);
+       
+    var d = new Date();
+    var seconds = d.getMinutes() * 60 + d.getSeconds();
+    var fiveMin = 60 * MAX_MINUTS_PER_ENTONGUE;
+    var timeleft = fiveMin - seconds % fiveMin;
+    var diff = parseInt(timeleft / 60);
     
-    var diff = (minutes_saved.getMinutes() + MAX_MINUTS_PER_ENTONGUE) - minutes_now.getMinutes();
-    
+    console.log(diff);
 console.log(req.session.entongues);
 console.log(can);
     res.render('index', { 
@@ -40,11 +42,12 @@ console.log(can);
 };
 
 exports.lesstime = function(req, res) {
-    var minutes_now = new Date();
-    var minutes_saved = new Date(req.session.dt);
-    
-    var diff = (minutes_saved.getMinutes() + MAX_MINUTS_PER_ENTONGUE) - minutes_now.getMinutes();
-    
+    var d = new Date();
+    var seconds = d.getMinutes() * 60 + d.getSeconds();
+    var fiveMin = 60 * MAX_MINUTS_PER_ENTONGUE;
+    var timeleft = fiveMin - seconds % fiveMin;
+    var diff = parseInt(timeleft / 60) + ' minutos y ' + timeleft % 60 + ' segundos';
+    console.log(diff);
     res.json({'minutes': diff});
 };
 

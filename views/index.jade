@@ -25,13 +25,11 @@ block content
 
             button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar 
                 | por 
-                span#less_minutes #{minutes || 60} 
-                | &nbsp;minutos
+                span#less_minutes
         else
             button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar 
                 | por 
-                span#less_minutes #{minutes} 
-                | &nbsp;minutos
+                span#less_minutes 
 
     #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
@@ -60,5 +58,5 @@ block content
                 $('#less_minutes').empty();
                 $('#less_minutes').append(data.minutes);
             });
-        }, 10000);
+        }, 1000);
 
