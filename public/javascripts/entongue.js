@@ -6,8 +6,8 @@ function refresh_entongues(map) {
 
     if ( ! Gposition) return;
 
-    //var get_url = '/get?lat=' 
-    var get_url = '/get-test?lat=' 
+    var get_url = '/get?lat=' 
+//    var get_url = '/get-test?lat=' 
         + Gposition.coords.latitude 
         + '&lon=' 
         + Gposition.coords.longitude
