@@ -24,8 +24,6 @@ exports.index = function(req, res){
 
     var can = (req.session.entongues||0) < MAX_ENTONGUES_PER_SESSION ;
     
-console.log(req.session.entongues);
-console.log(can);
     res.render('index', { 
         title: 'Entongue', 
         session: req.session, 
@@ -70,12 +68,15 @@ console.log(req.session.dt);
 };
 
 exports.getEntongue = function (req, res, next) {
-    var ahora = new Date();
-    ahora.setHours(ahora.getHours() + 1);
+    var limit = Date.now() - 3600*1000;
+
+    var limit_dt = new Date(limit);
+
+//console.log("DT",limit_dt.toISOString());
     
     Location.find(
         {
-            'updated': { $lt : ahora}
+            'updated': { $gt : limit_dt.toISOString()}
         }, 
         function(err, locations){
         if (err) next(err);

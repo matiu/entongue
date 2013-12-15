@@ -2,39 +2,72 @@
 var old_heat;
 var Gposition;
 var Gmap;
+var Gmarkers = [];
 
 function refresh_entongues() {
 
     if ( ! Gposition) return;
 
-    var get_url = '/get?lat=' 
-//    var get_url = '/get-test?lat=' 
-        + Gposition.coords.latitude 
+    var get_url;
+    if (window.location.href.indexOf('test=1') >= 0 ) {
+        get_url = '/get-test?lat=';
+    }
+    else {
+        get_url = '/get?lat=' ;
+    }
+
+    get_url += Gposition.coords.latitude 
         + '&lon=' 
         + Gposition.coords.longitude
         ;
 
     jQuery.getJSON( get_url, function(data) {   
 
+        // borrar markers antiguos
+        $.each(Gmarkers, function (index,val) {
+            val.setMap(null);
+        });
+
+        Gmarkers = [];
+
         var items = [];
+        var i=0;
         $.each( data.entongues, function( index, val ) {
 
-            // 
-            var d = - (1. - ( parseFloat( Date.now() - new Date(val.updated)) /1000./60./60.  ));
+            
+            var pasaron_segs =  (  Date.now() - new Date(val.updated) ) /1000. ;
+//console.log("pasaron",pasaron_segs);
 
-//console.log(d);
+            var d = 1. - (  pasaron_segs /3600. );
 
+//console.log("now",Date.now()/1000.);
+//console.log("updated",new Date(val.updated)/1000.);
+//console.log("d",d);
+
+            var pos = new google.maps.LatLng( val.lat, val.lon);
             items.push({ 
-                location: new google.maps.LatLng( val.lat, val.lon), 
+                location: pos, 
                 weight: d || 0.9
             });
+
+           Gmarkers[i++] =  new google.maps.Marker({
+                position: pos,
+                map: Gmap,
+                title: val.tag,
+                icon: {
+                    url: '/images/tag-' + val.tag + '.png',
+                    anchor: new google.maps.Point(16,16)
+                } 
+            });
+
+
         });
 
 //console.log(items);
         var heatmap = new google.maps.visualization.HeatmapLayer({
             data: items 
         });
-        heatmap.set('radius', 80);
+        heatmap.set('radius', 50);
         console.log("setting the heat!");
         heatmap.setMap(Gmap);
 
@@ -75,7 +108,7 @@ function success(position) {
     var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     var options = {
-        zoom: 12,
+        zoom: 11,
         center: coords,
         mapTypeControl: false,
         navigationControlOptions: {
