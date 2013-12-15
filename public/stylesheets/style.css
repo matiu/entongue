@@ -27,3 +27,13 @@ h1 {
     margin: 5px 0;
     text-align: left;
 }
+
+.alert {
+    margin: 0 auto 10px;
+    width: 90%;
+    padding: 4px;
+}
+
+.alert-dismissable .close {
+    right: 4px;
+}
