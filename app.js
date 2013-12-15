@@ -81,7 +81,6 @@ else {
 }
 
 app.get('/', routes.index);
-app.get('/lesstime', routes.lesstime);
 app.get('/set', routes.setEntongue);
 app.get('/get', routes.getEntongue);
 
