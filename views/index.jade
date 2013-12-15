@@ -1,7 +1,13 @@
 extends layout
 
+mixin btn(tag, cla, col, title)
+    button.btn.btn-default.btn-lg.eicon(data-tag="#{tag}", data-dismiss="modal")
+        i(class="#{cla}",style="color:#{col}") 
+        &nbsp; 
+        = title
 
 block content
+
 
     #entongue_ok.alert.alert-success.alert-dismissable.hide  
         a.close(data-dismiss="alert",href="#",aria-hidden="true")&times;
@@ -17,32 +23,22 @@ block content
                 i.fa.fa-th-large 
                     | &nbsp; ENTONGUEAR
 
-            button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar por 1 hora.
+            button#cant_entongue.btn.btn-primary.btn-lg.disabled.hide(style="width:80%; margin:10px auto; font-size:110%") No puedes entongar por 1 hora.
         else
             button#cant_entongue.btn.btn-primary.btn-lg.disabled(style="width:80%; margin:10px auto; font-size:140%") No puedes entongar 
                 | por 
                 span#less_minutes #{minutes} 
                 | &nbsp;minutos
 
-
     #myModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         .modal-dialog
             .modal-content
-                .modal-header
-                    button.close(type="button", data-dismiss="modal", aria-hidden="true")&times;
-                    h4#myModalLabel.modal-title ¿Qué entongás?
                 .modal-body
-                    table.text-center(style="width:100%")
-                        tr 
-                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-smile-o
-                            td: button.btn.btn-default.btn-lg.eicon(data-tag="meh", data-dismiss="modal"): i.fa.fa-meh-o
-                        tr 
-                            td: button.btn.btn-default.btn-lg.eicon(data-tag="frown", data-dismiss="modal"): i.fa.fa-frown-o
-                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-frown-o
-                        tr 
-                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-frown-o
-                            td: button.btn.btn-default.btn-lg.eicon(data-tag="smile", data-dismiss="modal"): i.fa.fa-frown-o
-
+                    +btn( "jam", "fa fa-truck", "#BF003D", "Embotellamiento")
+                    +btn( "riot", "fa fa-bullhorn", "#BF003D", "Protesta")
+                    +btn( "party", "fa fa-gift", "#BF003D", "Fiesta")
+                    +btn( "recital", "fa fa-music", "#BF003D", "Recital")
+                    +btn( "crawd", "fa fa-group", "#EE7339", "Tumulto")
 
 
     script.
@@ -62,5 +58,4 @@ block content
                 $('#less_minutes').append(data.minutes);
             });
         }, 10000);
-
 
