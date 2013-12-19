@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": false,
     "scripts": {
-    "start": "node app.js"
+        "start": "node app.js"
     },
     "dependencies": {
         "express": "3.4.4",
@@ -11,17 +11,15 @@
         "mongoose": "*",
         "connect-mongo" : "0.3.x"
     },
-
     "author": {
         "name": "Matias Alejo Garcia",
         "email": "ematiu (a) gmail.com"
     },
-
-    "contributors": {
+    "contributors": [
         "Gustavo Cortez <cmgustavo83@gmail.com>",
         "Yen Jung Hsiao <yenjunghsiao.yjh@gmail.comcmgustavo83@gmail.com>",
-        "Matias Alejo Garcia <ematiu@gmail.com>",
-    },
+        "Matias Alejo Garcia <ematiu@gmail.com>"
+    ],
     "repository": {
         "type": "git",
         "url": "git://github.com/matiu/entongue.git"
@@ -37,11 +35,9 @@
         "goople api",
         "geoloc",
         "maps",
-        "geolocalization",
+        "geolocalization"
     ],
     "engines": {
         "node": "*"
     } 
-
- 
 }
