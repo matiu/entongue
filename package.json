@@ -1,7 +1,7 @@
 {
-    "name": "application-name",
+    "name": "entongue",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "scripts": {
     "start": "node app.js"
     },
@@ -10,5 +10,38 @@
         "jade": "*",
         "mongoose": "*",
         "connect-mongo" : "0.3.x"
-    }
+    },
+
+    "author": {
+        "name": "Matias Alejo Garcia",
+        "email": "ematiu (a) gmail.com"
+    },
+
+    "contributors": {
+        "Gustavo Cortez <cmgustavo83@gmail.com>",
+        "Yen Jung Hsiao <yenjunghsiao.yjh@gmail.comcmgustavo83@gmail.com>",
+        "Matias Alejo Garcia <ematiu@gmail.com>",
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/matiu/entongue.git"
+    },
+    "bugs": {
+        "url": "https://github.com/matiu/entongue/issues"
+    },
+    "homepage": "https://github.com/matiu/entongue",
+    "license": "MIT",
+    "keywords": [
+        "entongue",
+        "google maps",
+        "goople api",
+        "geoloc",
+        "maps",
+        "geolocalization",
+    ],
+    "engines": {
+        "node": "*"
+    } 
+
+ 
 }
